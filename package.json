@@ -1,0 +1,11 @@
+{
+  "name": "practice-Angular",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/arkrish1993/practice-Angular.git",
+  "author": "arkrish1993 <archanarkrishnan3@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/cli": "^12.2.7"
+  }
+}
