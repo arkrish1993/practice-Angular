@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/app/Task';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-task-item',
@@ -11,7 +12,11 @@ export class TaskItemComponent implements OnInit {
   @Input() task: Task;
   faTimes = faTimes;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}
+
+  onDelete(id: number) {
+    console.log(id);
+  }
 }
