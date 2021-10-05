@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UiService } from 'src/app/services/ui.service';
 import { Task } from 'src/app/Task';
@@ -8,7 +14,7 @@ import { Task } from 'src/app/Task';
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.css'],
 })
-export class AddTaskComponent implements OnInit {
+export class AddTaskComponent implements OnInit, OnDestroy {
   @Output() onAddTask: EventEmitter<Task> = new EventEmitter();
 
   subscription: Subscription;
@@ -25,6 +31,11 @@ export class AddTaskComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  ngOnDestroy() {
+    // Unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
+  }
 
   onSubmit() {
     const newTask = {
