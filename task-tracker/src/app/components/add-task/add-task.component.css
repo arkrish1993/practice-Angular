@@ -1,3 +1,8 @@
 .add-form {
   margin-bottom: 40px;
 }
+
+.disable {
+  cursor: default;
+  background-color: grey;
+}
