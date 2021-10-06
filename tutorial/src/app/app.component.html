@@ -1,4 +1,4 @@
-<h1>{{ title | lowercase }}</h1>
+<!-- <h1>{{ title | lowercase }}</h1>
 <button (click)="handleClick()">Click</button>
 <input
   type="text"
@@ -8,4 +8,22 @@
 />
 <p>{{ jsonValue | json }}</p>
 <p>{{ date | date: "M:d:H"}}</p>
-<p>{{ title  | truncate }}</p>
+<p>{{ title  | truncate }}</p> -->
+
+<input
+  type="text"
+  name="title"
+  [(ngModel)]="userData.id"
+/>
+<input
+  type="text"
+  name="title"
+  [(ngModel)]="userData.name"
+/>
+<input
+  type="text"
+  name="title"
+  [(ngModel)]="userData.age"
+/>
+
+<app-user [user]="userData" (userEvent)="userEventHandler($event)"></app-user>

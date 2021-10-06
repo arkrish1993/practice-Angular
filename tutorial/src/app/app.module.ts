@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TruncatePipe
+    TruncatePipe,
+    UserComponent
   ],
   imports: [
     BrowserModule,
