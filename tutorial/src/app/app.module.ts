@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
-import { StorageService } from './services/storage.service';
 import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
@@ -15,9 +15,10 @@ import { TruncatePipe } from './pipes/truncate.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [StorageService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
