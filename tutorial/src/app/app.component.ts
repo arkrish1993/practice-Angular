@@ -18,6 +18,9 @@ export class AppComponent implements OnInit{
     id: 1,
     isTrue: false
   }
+  testChange=""
+
+  
 
   posts: any = []
 
