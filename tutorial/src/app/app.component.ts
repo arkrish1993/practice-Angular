@@ -19,14 +19,14 @@ export class AppComponent implements OnInit{
     isTrue: true
   }
 
-  posts: Array<any> = []
+  posts: any = this.httpService.getRequest('https://jsonplaceholder.typicode.com/posts').subscribe()
 
   showUser: boolean = false;
 
   constructor(private httpService: HttpService) {}
 
   ngOnInit() {
-    this.getPosts()
+    // this.getPosts()
   }
 
   handleClick() {
@@ -39,9 +39,9 @@ export class AppComponent implements OnInit{
     console.log(user)
   }
 
-  getPosts() {
-    this.httpService.getRequest('https://jsonplaceholder.typicode.com/posts').subscribe(response => {
-      this.posts = response
-    })
-  }
+  // getPosts() {
+  //   this.httpService.getRequest('https://jsonplaceholder.typicode.com/posts').subscribe(response => {
+  //     this.posts = response
+  //   })
+  // }
 }
