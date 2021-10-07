@@ -4,7 +4,7 @@ interface UserInterface {
   id?:number,
   name:string,
   age:string,
-  isColored: boolean
+  isTrue: boolean
 }
 
 @Component({
@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.isTrue = this.user.isColored ? this.user.isColored : false
+    this.isTrue = this.user.isTrue ? this.user.isTrue : false
   }
 
   sendUserEvent() {

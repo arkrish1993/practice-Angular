@@ -10,29 +10,17 @@
 <p>{{ date | date: "M:d:H"}}</p>
 <p>{{ title  | truncate }}</p> -->
 
-<input
-  type="text"
-  name="title"
-  [(ngModel)]="userData.id"
-/>
-<input
-  type="text"
-  name="title"
-  [(ngModel)]="userData.name"
-/>
-<input
-  type="text"
-  name="title"
-  [(ngModel)]="userData.age"
-/>
-<ng-container *ngIf="showUser">
+<input type="text" name="title" [(ngModel)]="userData.id" />
+<input type="text" name="title" [(ngModel)]="userData.name" />
+<input type="text" name="title" [(ngModel)]="userData.age" />
+<ng-template [ngIf]="showUser">
   <app-user [user]="userData" (userEvent)="userEventHandler($event)"></app-user>
-</ng-container>
+</ng-template>
 
-<!-- If not async, then syntax would be 
-<ul *ngFor="let post of posts; let i=index">
+<!-- If async, then syntax would be 
+<ul *ngFor="let post of posts|async; index as i">
 -->
-<ul *ngFor="let post of (posts | async); let i=index">
-  <li>{{ index }}</li>
-  <li>{{ post | json }}</li>
+<ul *ngFor="let post of posts; index as i">
+  <li>{{ i }}</li>
+  <li>{{ post.title }}</li>
 </ul>
