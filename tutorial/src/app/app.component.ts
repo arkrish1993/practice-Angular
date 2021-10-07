@@ -19,6 +19,8 @@ export class AppComponent {
     isTrue: true
   }
 
+  showUser: boolean = false;
+  
   constructor(private httpService: HttpService) {}
 
   handleClick() {

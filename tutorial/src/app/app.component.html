@@ -25,5 +25,6 @@
   name="title"
   [(ngModel)]="userData.age"
 />
-
-<app-user [user]="userData" (userEvent)="userEventHandler($event)"></app-user>
+<ng-container *ngIf="showUser">
+  <app-user [user]="userData" (userEvent)="userEventHandler($event)"></app-user>
+</ng-container>
