@@ -28,3 +28,7 @@
 <ng-container *ngIf="showUser">
   <app-user [user]="userData" (userEvent)="userEventHandler($event)"></app-user>
 </ng-container>
+
+<ul *ngFor="let post of posts">
+  <li>{{ post | json }}</li>
+</ul>

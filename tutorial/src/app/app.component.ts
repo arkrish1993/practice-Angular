@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpService } from './services/http.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { HttpService } from './services/http.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   // title = 'Hello world How are you ?';
   // jsonValue = {
   //   test: 123,
@@ -19,9 +19,15 @@ export class AppComponent {
     isTrue: true
   }
 
+  posts: Array<any> = []
+
   showUser: boolean = false;
-  
+
   constructor(private httpService: HttpService) {}
+
+  ngOnInit() {
+    this.getPosts()
+  }
 
   handleClick() {
     // this.httpService.getRequest('https://jsonplaceholder.typicode.com/todos/1').subscribe(response => {
@@ -31,5 +37,11 @@ export class AppComponent {
 
   userEventHandler(user: any) {
     console.log(user)
+  }
+
+  getPosts() {
+    this.httpService.getRequest('https://jsonplaceholder.typicode.com/posts').subscribe(response => {
+      this.posts = response
+    })
   }
 }
