@@ -15,7 +15,8 @@ export class AppComponent {
   userData= {
     name: "John",
     age: "20",
-    id: 1
+    id: 1,
+    isTrue: true
   }
 
   constructor(private httpService: HttpService) {}

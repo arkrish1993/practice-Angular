@@ -3,7 +3,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 interface UserInterface {
   id?:number,
   name:string,
-  age:string
+  age:string,
+  isColored: boolean
 }
 
 @Component({
@@ -14,11 +15,15 @@ interface UserInterface {
 export class UserComponent implements OnInit {
   @Input() user: UserInterface;
   @Output() userEvent: EventEmitter<UserInterface> = new EventEmitter<UserInterface>()
+
+  isTrue: boolean = false;
+
   constructor() { 
     this.user = {} as UserInterface
   }
-
+  
   ngOnInit(): void {
+    this.isTrue = this.user.isColored ? this.user.isColored : false
   }
 
   sendUserEvent() {
