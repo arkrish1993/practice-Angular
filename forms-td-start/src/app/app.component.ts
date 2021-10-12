@@ -16,6 +16,19 @@ export class AppComponent {
 
   suggestUserName() {
     const suggestedName = 'Superuser';
+    //Method 1 : will reset all entered values. NOT RECOMMENDED
+    // this.signupForm.setValue({
+    //   userData: {username: suggestedName, email: ''},
+    //   answer: "",
+    //   gender: "male",
+    //   secret: "pet"
+    // })
+    //Method 2: Only override specific values
+    this.signupForm.form.patchValue({
+      userData: {
+        username: suggestedName
+      }
+    })
   }
 
   // onSubmit(form: NgForm) {
