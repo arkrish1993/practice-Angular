@@ -8,9 +8,11 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent {
 
+  @ViewChild("fRef") signupForm : NgForm
   defaultQuestion: string = 'pet'
   questionAnswer: string = ''
-  @ViewChild("fRef") signupForm : NgForm
+  genders: string[] = ['male', 'female']
+  defaultGender: string = 'female'
 
   suggestUserName() {
     const suggestedName = 'Superuser';
