@@ -76,8 +76,18 @@
             </label>
           </div>
         </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!fRef.valid">Submit</button>
       </form>
+      <div class="row" *ngIf="isSubmitted">
+        <div class="col-xs-12">
+          <h3>User Data:</h3>
+          <p>Name: {{user.username}}</p>
+          <p>Email ID: {{user.email}}</p>
+          <p>Gender: {{user.gender}}</p>
+          <p>Secret Question: {{user.secret}}</p>
+          <p>Answer: {{user.answer}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
