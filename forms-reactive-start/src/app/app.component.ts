@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit{
     this.signupForm = new FormGroup({
       'userdata': new FormGroup({
         'username': new FormControl(null, [Validators.required, this.validateName.bind(this)]),
-        'email': new FormControl(null, [Validators.required, Validators.email])
+        'email': new FormControl(null, [Validators.required, Validators.email], this.validateEmails.bind(this))
       }),
       'gender': new FormControl('female'),
       'hobbies': new FormArray([])
@@ -46,5 +47,18 @@ export class AppComponent implements OnInit{
      * It's just how it works.
      */
     return null
+  }
+
+  validateEmails(control: FormControl) : Promise<any> | Observable<any> {
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (control.value === 'abc@xyz.com') {
+          resolve({'emailIsForbidden': false})
+        } else {
+          resolve(null)
+        }
+      }, 1500)
+    })
+    return promise
   }
 }
