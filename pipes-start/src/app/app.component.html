@@ -5,6 +5,8 @@
       <hr>
       <input type="text" [(ngModel)]="filteredStatus" >
       <hr>
+      <span>App Status: {{ appStatus | async }}</span>
+      <hr>
       <ul class="list-group">
         <li
           class="list-group-item"
