@@ -1,7 +1,13 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-    name: 'filter'
+    name: 'filter',
+    /**
+     * Causes pipe to be triggerred whenever a change happens to value. 
+     * Can cause performance issues.
+     * So, be careful while doing so.
+     */
+    pure:false 
 })
 export class FilterPipe implements PipeTransform {
     transform(value: any, filterString: string, propName: string) {
