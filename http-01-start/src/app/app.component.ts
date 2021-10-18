@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import {map} from 'rxjs/operators'
+import {map, throwIfEmpty} from 'rxjs/operators'
 import { Post } from './post.model';
+import { PostsService } from './posts.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent implements OnInit {
   loadedPosts: Array<Post> = [];
   isFetching: boolean = false
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private postsService: PostsService) {}
 
   @ViewChild('postForm') formRef: NgForm;
   ngOnInit() {
@@ -21,27 +22,16 @@ export class AppComponent implements OnInit {
   }
 
   onCreatePost(postData: { title: string; content: string }) {
-    // Send Http request
-    this.http.post('https://udemy-http-1c237-default-rtdb.firebaseio.com/posts.json', postData).subscribe(post => {
-      this.formRef.form.reset()
+    this.postsService.createAndStorePost(postData)
+    .subscribe(() => {
+      this.formRef.reset()
+      this.onFetchPosts()
     })
   }
 
   onFetchPosts() {
-    // Send Http request
     this.isFetching = true;
-    this.http.get('https://udemy-http-1c237-default-rtdb.firebaseio.com/posts.json')
-    .pipe(map((data: {[key: string]: Post}) => {
-      const postsArray: Post[] = []
-      for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-          postsArray.push({
-            ...data[key], id: key
-          })
-        }
-      }
-      return postsArray
-    }))
+    this.postsService.fetchPosts()
     .subscribe(posts => {
       this.loadedPosts = posts
       this.isFetching = false
@@ -49,6 +39,9 @@ export class AppComponent implements OnInit {
   }
 
   onClearPosts() {
-    // Send Http request
+    this.postsService.deleteAllPosts()
+    .subscribe(() => {
+      this.loadedPosts = []
+    })
   }
 }
