@@ -1,14 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-interface AuthResponseData {
+export interface AuthResponseData {
   idToken: string;
   email: string;
   refreshToken: string;
   expiresIn: string;
   localId: string;
+  registered?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -27,18 +28,7 @@ export class AuthService {
           returnSecureToken: true,
         }
       )
-      .pipe(
-        catchError((error) => {
-          let errorMessage = 'An unknown error occurred!';
-          if (error.error && error.error.error) {
-            switch (error.error.error.message) {
-              case 'EMAIL_EXISTS':
-                errorMessage = 'This email exists already!';
-            }
-          }
-          return throwError(errorMessage);
-        })
-      );
+      .pipe(catchError(this.handleError));
   }
 
   login(email: string, password: string): Observable<AuthResponseData> {
@@ -51,11 +41,24 @@ export class AuthService {
           returnSecureToken: true,
         }
       )
-      .pipe(
-        catchError((error) => {
-          let errorMessage = 'An unknown error occurred!';
-          return throwError(errorMessage);
-        })
-      );
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(errorRes: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occurred!';
+    if (errorRes.error && errorRes.error.error) {
+      switch (errorRes.error.error.message) {
+        case 'EMAIL_EXISTS':
+          errorMessage = 'This email exists already!';
+          break;
+        case 'EMAIL_NOT_FOUND':
+          errorMessage = 'This email does not exist!';
+          break;
+        case 'INVALID_PASSWORD':
+          errorMessage = 'Invalid password!';
+          break;
+      }
+    }
+    return throwError(errorMessage);
   }
 }
