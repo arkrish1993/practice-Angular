@@ -1,10 +1,28 @@
 <mat-card>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <textarea matInput rows="6" [(ngModel)]="newPost"></textarea>
-  </mat-form-field>
-  <button mat-raised-button (click)="onAddPost()" color="primary">
-    Save Post
-  </button>
+  <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input
+        #title="ngModel"
+        type="text"
+        matInput
+        ngModel
+        name="title"
+        required
+      />
+      <mat-error *ngIf="title.invalid">Title cannot be empty.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <textarea
+        #content="ngModel"
+        matInput
+        rows="6"
+        name="content"
+        ngModel
+        required
+      >
+      </textarea>
+      <mat-error *ngIf="content.invalid">Content cannot be empty.</mat-error>
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary">Save Post</button>
+  </form>
 </mat-card>
-
-<p>{{ newPost }}</p>
